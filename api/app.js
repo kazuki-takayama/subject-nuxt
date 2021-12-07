@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
     res.json(text)
 })
 
-app.post('/add', (req, res) => {
+app.post('/', (req, res) => {
     console.log(req.body)
         const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
