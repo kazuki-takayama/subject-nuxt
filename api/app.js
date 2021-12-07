@@ -22,8 +22,8 @@ app.get('/', (req, res) => {
         },
         {
         完了: 3,
-        name: "資料作成",
-        name: "資料作成"
+        name: "",
+        name: ""
         },
     ]
     res.json(text)
