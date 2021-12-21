@@ -19,7 +19,6 @@
             </template>
             <v-card>
               <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
               </v-card-title>
               <v-card-text>
                 <v-container>
@@ -57,35 +56,11 @@
               </v-card-actions>
             </v-card>
           </v-dialog>
-            <v-dialog v-model="dialogDelete" max-width="500px">
-            <v-card>
-              <v-card-title class="text-h5">削除しますか？</v-card-title>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="closeDelete">Cancel</v-btn>
-                <v-btn color="blue darken-1" text @click="deleteItemConfirm">OK</v-btn>
-                <v-spacer></v-spacer>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         <v-data-table :headers="headers" :items="items">
           <template v-slot:item.delete="{ item }">
-            <v-btn small color="error" @click="deleteItem(item)">delete</v-btn>
+            <v-btn small color="error" @click="remove(item)">delete</v-btn>
           </template>
           <template v-slot:item.actions="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="editItem(item)"
-      >
-        Save
-      </v-icon>
-      <v-icon
-        small
-        @click="deleteItem(item)"
-      >
-        delete
-      </v-icon>
     </template>
         </v-data-table>
       </v-col>
@@ -136,58 +111,40 @@ export default {
     }
   },
 
-  editItem (item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-    
-  computed: {
-    formTitle () {
-      return this.editedIndex === -1 ? 'TODO追加' : 'Edit Item'
-    },
-  },
-
   mounted() {
     axios.get('http://localhost:4000')
     .then(response => this.items = response.data);
   },
   methods: {
-      deleteItem (item) {
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialogDelete = true
-    },
-    addItem() {
-      axios.post('http://localhost:4000/add', )
-      .then(response => this.items = response.data);
-    },
-      deleteItemConfirm () {
-      this.items.splice(this.editedIndex, 1)
-      this.closeDelete()
-    },
+      
     close () {
       this.dialog = false
       this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
+      this.editedItem = Object.assign({}, this.defaultItem)
+      this.editedIndex = -1
       })
     },
-    closeDelete () {
-      this.dialogDelete = false
-      this.$nextTick(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      })
-    },
+    
     create () {
-      if (this.editedIndex > -1) {
-        Object.assign(this.items[this.editedIndex], this.editedItem)
-      } else {
-        this.items.push(this.editedItem)
-      }
-      this.close()
+      this.items.push(this.editedItem)
+    axios.post('http://localhost:4000/add',this.editedItem)
+    .then(response => {
+        console.log('response :editedItem', response.item);
+    });
     },
+    
+    remove(item) {
+      const
+    axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
+    console.log(item._id);
+    console.log(res.data);  
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.items.splice(this.editedIndex, 1)
+      this.items()
+      this.dialogDelete = true
+    })
+    }
   },
 }
 </script>
