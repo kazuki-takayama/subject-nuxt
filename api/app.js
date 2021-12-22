@@ -61,22 +61,24 @@ app.post('/add', (req, res) => {
     res.json('success')
 })
 
-app.delete(`/todos/${item._id}`, function (req, res) {
+app.delete(`/todos/:id`,  (req, res)  => {
     req.body
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-    const collection = client.db('Todoリスト').collection('todo');
     client.connect(err => {
         console.log(err)
+        const collection = client.db('Todoリスト').collection('todo');
         console.log('Ccccconnected successfully to server');
-        collection.findOneAndDelete(item._id).select('_id').lean()
-        console.log(0724);
+        const ObjectId = require('mongodb').ObjectId
+        collection.findOneAndDelete({ _id: ObjectId(req.params) },(err, result) => {
+            console.log(err)
+            console.log(result);
             client.close();
-    });
+        })
     res.json('success')
+})
 })
 
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
-

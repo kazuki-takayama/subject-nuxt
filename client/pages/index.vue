@@ -134,14 +134,12 @@ export default {
     },
     
     remove(item) {
-      const
+    console.log(item._id)
+    console.log(item)
     axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
-    console.log(item._id);
-    console.log(res.data);  
       this.editedIndex = this.items.indexOf(item)
       this.editedItem = Object.assign({}, item)
       this.items.splice(this.editedIndex, 1)
-      this.items()
       this.dialogDelete = true
     })
     }
