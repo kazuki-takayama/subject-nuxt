@@ -57,34 +57,15 @@ export default {
   asyncData() {
     return {
       posts: [],
-      headers: [
-        {
-          text: 'Todo',
-          value: 'id',
-        },
-        {
-          text: '予定',
-          value: 'name',
-        },
-        {
-          text: '完了',
-          value: 'task',
-        },
-        {
-          text: '削除',
-          value: 'delete',
-          sortable: false
-        }
-      ],
       dialog: false,
       dialogDelete: false,
       editedIndex: -1,
       defaultItem: {
-      name: '',
-    },
-    editedItem: {
-      name: '',
-    },
+        name: '',
+      },
+      editedItem: {
+        name: '',
+      },
       serverDatas: [
       ],
       items: [
@@ -92,20 +73,18 @@ export default {
       ],
     }
   },
-  
-  mounted() {
-    axios.get('http://localhost:4000')
-    .then(response => this.items = response.data);
-  },
+
+
   methods: {
-  close () {
+      close () {
       this.dialog = false
       this.$nextTick(() => {
       this.editedItem = Object.assign({}, this.defaultItem)
       this.editedIndex = -1
       })
-  this.$emit('close');
+      this.$emit('close',this.editedItem);
   },
+    
 
     create () {
       this.items.push(this.editedItem)
@@ -113,19 +92,8 @@ export default {
     .then(response => {
         console.log('response :editedItem', response.item);
     });
-    this.$emit('create');
+    this.$emit('create',this.editedItem);
     },
-
-    remove(item) {
-    console.log(item._id)
-    console.log(item)
-    axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
-      this.editedIndex = this.items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.items.splice(this.editedIndex, 1)
-      this.dialogDelete = true
-    })
-    }
   },
 }
 </script>

@@ -32,8 +32,9 @@ app.use(express.json());
 app.get('/', (req, res) => {
     req.body
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-        const collection = client.db('Todoリスト').collection('todo');
+    
         client.connect(err => {
+            const collection = client.db('Todoリスト').collection('todo');
             console.log(err)
         collection.find().toArray(function(err, result) {
             if (err) throw err;

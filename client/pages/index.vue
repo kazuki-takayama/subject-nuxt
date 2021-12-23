@@ -1,6 +1,7 @@
 <template>
   <v-container>
     <v-row>
+      
       <v-col cols="10">
         <addition>
           </addition>
@@ -17,12 +18,65 @@
 </template>
 
 <script>
+  import axios from 'axios';
   import addition from '~/components/addition.vue'
   export default {
   components: {
     addition,
+  },
+  
+    asyncData() {
+    return {
+      posts: [],
+      headers: [
+        {
+          text: 'Todo',
+          value: 'id',
+        },
+        {
+          text: '予定',
+          value: 'name',
+        },
+        {
+          text: '完了',
+          value: 'task',
+        },
+        {
+          text: '削除',
+          value: 'delete',
+          sortable: false
+        }
+      ],
+
+      defaultItem: {
+      name: '',
+    },
+    editedItem: {
+      name: '',
+    },
+      serverDatas: [
+      ],
+      items: [
+        
+      ],
+    }
+  },
+    mounted() {
+    axios.get('http://localhost:4000')
+    .then(response => this.items = response.data);
+  },
+  remove(item) {
+    console.log(item._id)
+    console.log(item)
+    axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
+      this.editedIndex = this.items.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.items.splice(this.editedIndex, 1)
+      this.dialogDelete = true
+    })
+    }
   }
-}
+
 
   
 </script>
