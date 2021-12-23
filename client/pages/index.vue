@@ -3,8 +3,9 @@
     <v-row>
       
       <v-col cols="10">
-        <addition>
-          </addition>
+
+        <addition @add="add"></addition>
+
         <v-data-table :headers="headers" :items="items">
           <template v-slot:item.delete="{ item }">
             <v-btn small color="error" @click="remove(item)">delete</v-btn>
@@ -47,6 +48,16 @@
           sortable: false
         }
       ],
+      defaultItem: {
+        name: '',
+      },
+    
+methods:{
+　add: function(){
+　  this.editedItem = false
+  items.push( this.editedItem );
+　}
+},
 
       defaultItem: {
       name: '',

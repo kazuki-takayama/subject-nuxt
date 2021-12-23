@@ -54,7 +54,7 @@
 import axios from 'axios';
 export default {
 
-  asyncData() {
+  data() {
     return {
       posts: [],
       dialog: false,
@@ -87,12 +87,11 @@ export default {
     
 
     create () {
-      this.items.push(this.editedItem)
     axios.post('http://localhost:4000/add',this.editedItem)
     .then(response => {
-        console.log('response :editedItem', response.item);
+        console.log('response :editedItem', response.data);
     });
-    this.$emit('create',this.editedItem);
+    this.$emit('add',this.editedItem);
     },
   },
 }
