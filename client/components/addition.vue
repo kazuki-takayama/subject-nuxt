@@ -51,10 +51,11 @@
 </template>
 
 <script>
+import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
 import axios from 'axios';
-export default {
+export default defineComponent ({
 
-  data() {
+  setup()  {
     return {
       posts: [],
       dialog: false,
@@ -94,6 +95,6 @@ export default {
     this.$emit('add',this.editedItem);
     },
   },
-}
+})
 </script>
 

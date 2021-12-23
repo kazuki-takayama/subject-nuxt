@@ -25,7 +25,7 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
   import addition from '~/components/addition.vue'
   export default defineComponent ({
   components: {
-    addition
+    addition,
   },
   
     setup()  {
@@ -72,13 +72,15 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
         
       ],
     }
+    },
   
-  
+  getRate(){
     axios.get('http://localhost:4000')
-    .then(response => this.items = response.data);
+    then(response => this.items = response.data);
+  },
 
   
-  remove(item) ;{
+  remove(item) {
     console.log(item._id)
     console.log(item)
     axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
@@ -88,7 +90,7 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
       this.dialogDelete = true
     })
     }
-    }
+    
   })
 
 

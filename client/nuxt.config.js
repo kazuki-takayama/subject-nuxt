@@ -40,6 +40,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/composition-api/module'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -67,10 +68,6 @@ export default {
     }
   },
 
-  
-    buildModules: [
-      '@nuxtjs/composition-api/module'
-    ],
   
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
