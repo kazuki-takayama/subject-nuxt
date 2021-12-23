@@ -19,14 +19,16 @@
 </template>
 
 <script>
+import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
+
   import axios from 'axios';
   import addition from '~/components/addition.vue'
-  export default {
+  export default defineComponent ({
   components: {
-    addition,
+    addition
   },
   
-    asyncData() {
+    setup()  {
     return {
       posts: [],
       headers: [
@@ -52,12 +54,11 @@
         name: '',
       },
     
-methods:{
 　add: function(){
 　  this.editedItem = false
   items.push( this.editedItem );
-　}
-},
+　},
+
 
       defaultItem: {
       name: '',
@@ -71,12 +72,13 @@ methods:{
         
       ],
     }
-  },
-    mounted() {
+  
+  
     axios.get('http://localhost:4000')
     .then(response => this.items = response.data);
-  },
-  remove(item) {
+
+  
+  remove(item) ;{
     console.log(item._id)
     console.log(item)
     axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
@@ -86,7 +88,8 @@ methods:{
       this.dialogDelete = true
     })
     }
-  }
+    }
+  })
 
 
   

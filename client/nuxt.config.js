@@ -4,6 +4,8 @@ export default {
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
+  
+
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - kazuki',
@@ -21,6 +23,7 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
+  
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
@@ -63,6 +66,12 @@ export default {
       }
     }
   },
+
+  
+    buildModules: [
+      '@nuxtjs/composition-api/module'
+    ],
+  
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
