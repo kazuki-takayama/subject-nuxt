@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="10">
-        <addition @add="add"></addition>
+        <!-- <addition @add="add"></addition> -->
 
         <v-data-table :headers="headers" :items="items">
           <template v-slot:item.delete="{ item }">
@@ -20,6 +20,9 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
 
   import axios from 'axios';
   import addition from '~/components/addition.vue'
+  import { 
+    onMounted,
+  }from '@nuxtjs/composition-api'
   export default defineComponent ({
     emits: ['add'],
   components: {
@@ -42,11 +45,10 @@ const headers = reactive ({
 })
 const items = reactive ({
   items:[
-    {sss:sssddddfffggg}
   ]
 })
 
-console.log(items.items)
+
 const editedItem = reactive ({
   name: ''
 })
@@ -61,13 +63,12 @@ const serverDatas = reactive ({
 })
 
 
-    
-
   onMounted (() => {
     axios.get('http://localhost:4000')
-    then,(response => items = response.data);
-  
-  
+    .then(response => items.items = response.data)
+    console.log('items >>>>>>>', items.items)
+        
+
   remove(item) ;{
     console.log(item._id)
     console.log(item)

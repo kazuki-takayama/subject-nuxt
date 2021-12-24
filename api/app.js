@@ -30,7 +30,9 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 app.get('/', (req, res) => {
+    
     req.body
+    console.log(11111)
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
     
         client.connect(err => {
@@ -40,6 +42,7 @@ app.get('/', (req, res) => {
             if (err) throw err;
         const todos = result
             client.close();
+            
     res.json(todos)
 })
 })
