@@ -86,7 +86,6 @@ export default defineComponent ({
       this.$emit('close',this.editedItem);
   },
     
-
     create () {
     axios.post('http://localhost:4000/add',this.editedItem)
     .then(response => {

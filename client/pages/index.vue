@@ -66,7 +66,7 @@ const serverDatas = reactive ({
   onMounted (() => {
     axios.get('http://localhost:4000')
     .then(response => items.items = response.data)
-    console.log('items >>>>>>>', items.items)
+    console.log(items.items)
         
 
   remove(item) ;{
