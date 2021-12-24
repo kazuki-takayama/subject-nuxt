@@ -77,20 +77,24 @@ export default defineComponent ({
 const dialog = reactive ({
   dialog: false
 })
+const items = reactive ({
+  items:[
+  ]
+})
 
 
   onMounted (() => {
       close () ;{
       dialog = false
       $nextTick(() => {
-      items.items = Object.assign({}, this.defaultItem)
+      items.items = Object.assign({}, items.defaultItem)
       editedIndex = -1
       })
       $emit('close',this.editedItem);
   }
     
     create () ;{
-    axios.post('http://localhost:4000/add',this.editedItem)
+    axios.post('http://localhost:4000/add',items.items)
     .then(response => {
         console.log('response :editedItem', response.data);
     });
@@ -110,9 +114,7 @@ const dialog = reactive ({
       // },
       // serverDatas: [
       // ],
-      // items: [
-        
-      // ],
+      items,
     }
   },
 })
