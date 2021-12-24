@@ -69,14 +69,14 @@ const serverDatas = reactive ({
     console.log(items.items)
         
 
-  remove(item) ;{
+  const remove = (item) => {
     console.log(item._id)
     console.log(item)
     axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
-      this.editedIndex = items.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.items.splice(this.editedIndex, 1)
-      this.dialogDelete = true
+      editedIndex = items.indexOf(item)
+      items.items = Object.assign({}, item)
+      items.items.splice(this.editedIndex, 1)
+      dialogDelete = true
     })
     
   }
@@ -90,7 +90,7 @@ const serverDatas = reactive ({
       headers,
       add,
     editedItem,
-  
+    remove,
     serverDatas,
     items,
 
