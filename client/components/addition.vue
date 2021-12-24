@@ -53,46 +53,67 @@
 <script>
 import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
 import axios from 'axios';
+import { nextTick } from '@nuxtjs/composition-api'
+import { 
+    onMounted,
+  }from '@nuxtjs/composition-api'
 export default defineComponent ({
 
   setup()  {
-    return {
-      posts: [],
-      dialog: false,
-      dialogDelete: false,
-      editedIndex: -1,
-      defaultItem: {
-        name: '',
-      },
-      editedItem: {
-        name: '',
-      },
-      serverDatas: [
-      ],
-      items: [
-        
-      ],
-    }
-  },
+    
+  const editedItem = reactive ({
+  name: ''
+})
+  const defaultItem = reactive ({
+  name: ''
+})
+  const editedIndex = reactive ({
+  editedIndex:-1
+})
+  const dialogDelete = reactive ({
+  dialogDelete: false
+})
+
+const dialog = reactive ({
+  dialog: false
+})
 
 
-  methods: {
-      close () {
-      this.dialog = false
-      this.$nextTick(() => {
-      this.editedItem = Object.assign({}, this.defaultItem)
-      this.editedIndex = -1
+  onMounted (() => {
+      close () ;{
+      dialog = false
+      $nextTick(() => {
+      items.items = Object.assign({}, this.defaultItem)
+      editedIndex = -1
       })
       this.$emit('close',this.editedItem);
-  },
+  }
     
-    create () {
+    create () ;{
     axios.post('http://localhost:4000/add',this.editedItem)
     .then(response => {
         console.log('response :editedItem', response.data);
     });
     this.$emit('add',this.editedItem);
-    },
+    }
+  })
+
+  return {
+        editedItem,
+      // posts: [],
+      dialog,
+      dialogDelete,
+      editedIndex,
+      defaultItem,
+      // editedItem: {
+      //   name: '',
+      // },
+      // serverDatas: [
+      // ],
+      // items: [
+        
+      // ],
+    }
   },
 })
 </script>
