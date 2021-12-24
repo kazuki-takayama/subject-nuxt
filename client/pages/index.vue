@@ -24,11 +24,12 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
   import axios from 'axios';
   import addition from '~/components/addition.vue'
   export default defineComponent ({
+    emits: ['add'],
   components: {
     addition,
   },
   
-    setup()  {
+    setup(items)  {
     return {
       posts: [],
       headers: [
@@ -53,6 +54,7 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
       defaultItem: {
         name: '',
       },
+      
     
 　add: function(){
 　  this.editedItem = false
