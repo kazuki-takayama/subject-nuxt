@@ -86,7 +86,7 @@ const dialog = reactive ({
       items.items = Object.assign({}, this.defaultItem)
       editedIndex = -1
       })
-      this.$emit('close',this.editedItem);
+      $emit('close',this.editedItem);
   }
     
     create () ;{
@@ -94,7 +94,7 @@ const dialog = reactive ({
     .then(response => {
         console.log('response :editedItem', response.data);
     });
-    this.$emit('add',this.editedItem);
+    $emit('add',items.items);
     }
   })
 
