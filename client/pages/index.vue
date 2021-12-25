@@ -47,7 +47,7 @@ const items = reactive ({
   items:[
   ]
 })
-
+console.log(items.items)
 
 const editedItem = reactive ({
   name: ''
@@ -67,6 +67,8 @@ const serverDatas = reactive ({
     axios.get('http://localhost:4000')
     .then(response => items.items = response.data)
     console.log(items.items)
+    console.log(response.data)
+    })
         
 
   const remove = (item) => {
@@ -80,10 +82,8 @@ const serverDatas = reactive ({
     })
     
   }
-    })
-
   
-
+  
   return {
       posts: [],
       defaultItem,
@@ -93,7 +93,6 @@ const serverDatas = reactive ({
     remove,
     serverDatas,
     items,
-
   }
   }
     
