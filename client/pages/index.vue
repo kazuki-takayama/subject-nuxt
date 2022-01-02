@@ -3,7 +3,6 @@
     <v-row>
       <v-col cols="10">
         <!-- <addition @add="add"></addition> -->
-
         <v-data-table :headers="headers" :items="items">
           <template v-slot:item.delete="{ item }">
             <v-btn small color="error" @click="remove(item)">delete</v-btn>
@@ -35,50 +34,60 @@ import { defineComponent, reactive, ref } from '@nuxtjs/composition-api'
 　  editedItem = false
   items.push( editedItem.name );
 　}
-const headers = reactive ({
-  headers:[
+
+const headers = 
+  [
   {text: 'Todo',value: 'id'},
   {text: '予定',value: 'name'},
   {text: '完了',value: 'task'},
-  {text: '削除',value: 'delete',sortable: false},
+  {text: '削除',value: 'delete',sortable: false}
   ]
-})
-const items = reactive ({
-  items:[
-  ]
-})
-console.log(items.items)
 
-const editedItem = reactive ({
-  name: ''
-})
 
-const defaultItem = reactive ({
-  name: ''
-})
+const items = 
+[
+{
 
-const serverDatas = reactive ({
+}
+]
+
+
+const editedItem = 
+[
+{name: ''}
+]
+
+const defaultItem = 
+[
+{name: ''}
+]
+
+const serverDatas = 
+[
+{
   items:[]
 
-})
+}
+]
 
 
   onMounted (() => {
     axios.get('http://localhost:4000')
     .then(response => items.items = response.data)
-    console.log(items.items)
-    console.log(response.data)
+    console.log(items.tasks)
+    
     })
         
 
   const remove = (item) => {
-    console.log(item._id)
     console.log(item)
     axios.delete(`http://localhost:4000/todos/${item._id}`).then(res => {    
-      editedIndex = items.indexOf(item)
-      items.items = Object.assign({}, item)
-      items.items.splice(this.editedIndex, 1)
+      editedIndex = item.indexOf(item)
+      items = Object.assign({}, item)
+      items.splice(this.editedIndex, 1)
+      
       dialogDelete = true
+      
     })
     
   }

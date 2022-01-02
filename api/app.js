@@ -7,7 +7,7 @@ const { MongoClient } = require('mongodb');
 const uri = "mongodb+srv://kazuki-takayama:kkkk6657@cluster0.vg3w0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 app.use(cors())
 
-const findOneAndDelete = (id) => api.delete(`/mongodb+srv://kazuki-takayama:kkkk6657@cluster0.vg3w0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/${id}`);
+const findByIdAndDelete = (id) => api.delete(`/mongodb+srv://kazuki-takayama:kkkk6657@cluster0.vg3w0.mongodb.net/myFirstDatabase?retryWrites=true&w=majority/${id}`);
 const text = [
     {
         Todo: 1,

@@ -83,8 +83,8 @@ const items = reactive ({
 })
 
 
-  onMounted (() => {
-      close () ;{
+  
+      close = () => {
       dialog = false
       $nextTick(() => {
       items.items = Object.assign({}, items.defaultItem)
@@ -92,7 +92,8 @@ const items = reactive ({
       })
       $emit('close',this.editedItem);
   }
-    
+
+    onMounted (() => {
     create () ;{
     axios.post('http://localhost:4000/add',items.items)
     .then(response => {
@@ -109,6 +110,7 @@ const items = reactive ({
       dialogDelete,
       editedIndex,
       defaultItem,
+      
       // editedItem: {
       //   name: '',
       // },
